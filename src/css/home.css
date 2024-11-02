@@ -1,0 +1,13 @@
+.areaWork{
+    background-image: url('../img/abstrato-white-1.webp');
+    background-size: cover;
+    background-position: center;
+    width: calc(100% - 280px);
+    height: 100vh;
+    margin-left: 280px;
+    padding-top: 5rem;
+    padding-left: 1rem;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+

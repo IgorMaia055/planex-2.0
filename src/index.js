@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Preload from './components/Preload';
+import App from './components/App'; // Seu componente principal
+import reportWebVitals from './components/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const Main = () => {
+    return (
+        <>
+            {/* {loading ? <Preload /> : <App />} Mostra o Preload enquanto carrega */}
+            <App />
+        </>
+    );
+};
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <Main />
+    </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

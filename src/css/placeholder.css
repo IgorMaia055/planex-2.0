@@ -1,0 +1,16 @@
+.placeholderElement {
+    width: 100%; /* Ajuste conforme necessário */
+    height: 100%; /* Ajuste conforme necessário */
+    background: linear-gradient(90deg, #f0f0f0, #d0d0d0, #f0f0f0);
+    background-size: 200% 100%;
+    animation: gradientAnimation 1s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}

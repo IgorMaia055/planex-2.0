@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  margin-bottom: -2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    /* animation: App-logo-spin infinite 20s linear; */
+  }
+}
+
+.App-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.txt-footer{
+  font-style: italic;
+  margin-top: 13rem;
+}
+
+.effectContainer{
+  width: 30rem;
+  text-align: center;
+}
+
+.typing-effect {
+  display: inline-block;
+  border-right: 2px solid;
+  white-space: nowrap; /* Impede a quebra de linha */
+  overflow: hidden; /* Esconde o texto que ultrapassa o container */
+  animation: typing 3s steps(30, end), blink-caret 0.15s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0; /* Começa com largura 0 */
+  }
+  to {
+    width: 100%; /* Termina com a largura total do texto */
+  }
+}
+
+@keyframes blink-caret {
+  50% {
+    border-color: transparent; /* Pisca o cursor */
+  }
+}

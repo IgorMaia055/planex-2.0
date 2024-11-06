@@ -50,7 +50,26 @@
     color: #ccc;
 }
 
-.btn-invisibled{
+.btn-invisibled {
     background-color: #0057b300;
     border: 0;
+}
+
+.confete {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.border-red{
+    border: 1px solid red;
+}
+
+.border-red-end{
+    border-right: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
 }

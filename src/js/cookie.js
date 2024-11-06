@@ -30,5 +30,16 @@ function deleteCookie(nome) {
     document.cookie = nome + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 }
 
+function checkCookie(nomeDoCookie) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === nomeDoCookie) {
+            return value;
+        }
+    }
+    return null; // Retorna null se o cookie não existir
+}
 
-export { setCookie, getCookie, deleteCookie };
+
+export { setCookie, getCookie, deleteCookie, checkCookie };

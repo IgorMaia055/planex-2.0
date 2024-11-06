@@ -1,5 +1,6 @@
 import { Modal } from 'bootstrap';
-import { setCookie, deleteCookie } from './cookie.js';
+import { setCookie, getCookie } from './cookie.js';
+import confete from '../js/confete.js'
 
 // Intercepta todos os formulários na página
 document.addEventListener('submit', function (event) {
@@ -40,11 +41,32 @@ document.addEventListener('submit', function (event) {
         .then(response => response.json())
         .then(responseData => {
 
-            if (data.etapa == 1) {
-                if (responseData.unic_id != '') {
-                    setCookie('unic_id', responseData.unic_id, 20)
-                }
+            if(responseData.errorInputs){
+                document.getElementById('floatingUsername').classList.add('border-red')
+                document.getElementById('floatingPassword').classList.add('border-red')
+                document.getElementById('secondPartPass').classList.add('border-red-end')
+            }
+            if(responseData.errorUsername){
+                document.getElementById('floatingUsername').classList.add('border-red')
+            } 
+            if(responseData.errorPassword){
+                document.getElementById('floatingPassword').classList.add('border-red')
+                document.getElementById('secondPartPass').classList.add('border-red-end')
+            }
 
+            if (responseData.successCadastro) {
+                setCookie('username', responseData.username, 30)
+                setCookie('password', responseData.password, 30)
+
+                document.cookie = "unic_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+                window.location.href = '/'
+            } else if (responseData.successCadastro == false) {
+                alert(responseData.message)
+                window.location.reload()
+            }
+
+            if (data.etapa == 1) {
                 if (responseData.codeError == 1) {
                     document.querySelector('#feedbackNomeEmpresa2').hidden = true
                     document.querySelector('#feedbackNomeEmpresa').hidden = false
@@ -55,6 +77,11 @@ document.addEventListener('submit', function (event) {
                     document.querySelector('#feedbackNomeEmpresa2').hidden = false
                 } else {
                     if (responseData.success) {
+                        console.log(responseData)
+                        setCookie('unic_id', responseData.unic_id, 20)
+
+                        document.getElementById('unic_idFinal').value = getCookie('unic_id')
+
                         const modalAnt = Modal.getInstance(document.getElementById(`etapa${data.etapa}`));
                         if (modalAnt) modalAnt.hide(); // Fecha o modal anterior, se existir
 
@@ -133,7 +160,7 @@ document.addEventListener('submit', function (event) {
             if (data.etapa == 4) {
                 if (responseData.error) {
                     alert(responseData.message)
-                    window.location.reload()
+                    // window.location.reload()
                 }
 
                 if (!responseData.segura) {
@@ -141,7 +168,16 @@ document.addEventListener('submit', function (event) {
                     document.getElementById('feedbackSenha').innerText = responseData.message
                     document.getElementById('pass').classList.add('is-invalid')
                 } else {
-                    alert(responseData.message)
+                    document.querySelector('.confete').hidden = false
+                    const modalAnt = Modal.getInstance(document.getElementById(`etapa${data.etapa}`));
+                    if (modalAnt) modalAnt.hide(); // Fecha o modal anterior, se existir
+
+                    const modalElement = document.getElementById(`modalFinalizado`);
+                    const modalProx = new Modal(modalElement, { backdrop: 'static' });
+
+                    modalProx.show();
+
+                    confete()
                 }
             }
 

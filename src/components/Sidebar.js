@@ -2,8 +2,11 @@ import '../css/sidebar.css';
 import logo from '../img/zambiank-ciano.png';
 import { useState } from 'react';
 import Icon from '../js/Icon.js';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar({ activeRouter }) {
+
+    const navigate = useNavigate();
 
     const [isOpen, setIsOpen] = useState(false);
     const toggleSidebar = () => setIsOpen(!isOpen);
@@ -12,7 +15,7 @@ function Sidebar({ activeRouter }) {
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-        window.location.href = '/login'
+        navigate('/login')
     }
 
     function NavLink({ data }) {
@@ -57,7 +60,9 @@ function Sidebar({ activeRouter }) {
 
         return (
             <li className="nav-item mb-2">
-                <a href={data.router} className={`nav-link text-white ${activeRouter == data.nameRouter ? 'active' : ''}  d-flex`}>
+                <a onClick={() => {
+                    navigate(data.router)
+                }} className={`nav-link text-white ${activeRouter == data.nameRouter ? 'active' : ''}  d-flex`}>
                     <div className={`${activeRouter == data.nameRouter ? '' : 'boxIcon'}`}>
                         {icon}
                     </div>
@@ -70,7 +75,9 @@ function Sidebar({ activeRouter }) {
     return (
         <>
             <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style={{ width: '280px', height: '100vh', position: 'fixed', top: 0, left: 0 }}>
-                <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <a onClick={() => {
+                    navigate('/')
+                }} className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <svg className="bi pe-none me-2" width="40" height="32">
                         <use xlinkHref="#bootstrap" />
                     </svg>

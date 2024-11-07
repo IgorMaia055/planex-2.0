@@ -68,3 +68,8 @@
     border-color: transparent; /* Pisca o cursor */
   }
 }
+
+
+a{
+  cursor: pointer;
+}

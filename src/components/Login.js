@@ -5,12 +5,11 @@ import Config from "../config/Config";
 import "../js/loginAPI.js";
 import { checkCookie, getCookie } from '../js/cookie.js';
 import { eyePassword, eyePassword2 } from '../js/eyePassword.js'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
-    function goHome() {
-        window.location.href = '/'
-    }
+    const navigate = useNavigate();
 
     function closeToast() {
         document.getElementById('toastRedirect').style.display = 'none'
@@ -19,7 +18,9 @@ function Login() {
     function alertEnterSystem() {
         return <div className="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="toastRedirect" style={{ display: 'block', position: 'fixed', right: '10px', top: '10px' }}>
             <div className="d-flex">
-                <div className="toast-body" onClick={goHome} style={{ cursor: 'pointer' }}>
+                <div className="toast-body" onClick={() => {
+                    navigate('/')
+                }} style={{ cursor: 'pointer' }}>
                     Entrar como <strong>{getCookie('username')}</strong>
                 </div>
                 <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" onClick={closeToast}></button>
@@ -134,7 +135,9 @@ function Login() {
                                     <button className="btn btn-primary btn-lg w-100 mt-3" onClick={checkInputs} style={{ borderRadius: "10rem" }} type="submit">Surpreenda-se</button>
                                 </form>
 
-                                <p className="mt-5">Ainda não tem uma conta?🤨 <a href="/register" data-bs-toggle="modal" data-bs-target="#etapa1" style={{ textDecoration: "none" }}>Cadastrar</a></p>
+                                <p className="mt-5">Ainda não tem uma conta?🤨 <a onClick={() => {
+                                    navigate('/register')
+                                }} data-bs-toggle="modal" data-bs-target="#etapa1" style={{ textDecoration: "none" }}>Cadastrar</a></p>
                             </div>
                         </div>
                     </div>

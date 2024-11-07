@@ -8,6 +8,13 @@ function Sidebar({ activeRouter }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggleSidebar = () => setIsOpen(!isOpen);
 
+    function exit() {
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        window.location.href = '/login'
+    }
+
     function NavLink({ data }) {
 
         let icon = '';
@@ -112,7 +119,7 @@ function Sidebar({ activeRouter }) {
                         <li><a className="dropdown-item" href="#">Settings</a></li>
                         <li><a className="dropdown-item" href="#">Profile</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="#">Sign out</a></li>
+                        <li><a href="#" className="dropdown-item" onClick={exit}>Sair</a></li>
                     </ul>
                 </div>
             </div>

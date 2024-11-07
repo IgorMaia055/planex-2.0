@@ -40,16 +40,32 @@ document.addEventListener('submit', function (event) {
     fetch(action, options)
         .then(response => response.json())
         .then(responseData => {
+            document.getElementById('feedbackLogin').hidden = true
 
-            if(responseData.errorInputs){
+            if (responseData.errorLogin) {
+                document.getElementById('floatingUsername').classList.add('border-red')
+                document.getElementById('floatingPassword').classList.add('border-red')
+                document.getElementById('secondPartPass').classList.add('border-red-end')
+                document.getElementById('feedbackLogin').hidden = false
+            }
+            if (responseData.successLogin) {
+                setCookie('username', responseData.username, 30)
+                setCookie('password', responseData.password, 30)
+
+                document.cookie = "unic_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+                window.location.href = '/'
+            }
+
+            if (responseData.errorInputs) {
                 document.getElementById('floatingUsername').classList.add('border-red')
                 document.getElementById('floatingPassword').classList.add('border-red')
                 document.getElementById('secondPartPass').classList.add('border-red-end')
             }
-            if(responseData.errorUsername){
+            if (responseData.errorUsername) {
                 document.getElementById('floatingUsername').classList.add('border-red')
-            } 
-            if(responseData.errorPassword){
+            }
+            if (responseData.errorPassword) {
                 document.getElementById('floatingPassword').classList.add('border-red')
                 document.getElementById('secondPartPass').classList.add('border-red-end')
             }
